@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "1d6e8f9a-55f6-4a04-8c5f-190376d9e0f0",
+		"name": "Cita",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39443149"
+	},
+	"item": [
+		{
+			"name": "PostCitas",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pacienteId\": 2,\r\n    \"doctorId\": 4,\r\n    \"fechaCita\": \"2024-11-10T10:00:00\",\r\n    \"notificado\": false,\r\n    \"motivo\": \"Consulta de rutina de culos\",\r\n    \"notas\": \"Paciente presenta síntomas leves.\",\r\n    \"fechaHora\": \"2024-11-07T09:00:00\",\r\n    \"insumoId\": 1,\r\n    \"cantidadUsada\": 2\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/citas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"citas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCitas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/citas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"citas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCitasID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/citas/24",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"citas",
+						"24"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutCitas",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"citaId\": 32,\r\n        \"pacienteId\": 2,\r\n        \"doctorId\": 4,\r\n        \"fechaCita\": \"2024-11-10T10:00:00\",\r\n        \"notificado\": false,\r\n        \"motivo\": \"Consulta de rutina de culos y penes\",\r\n        \"notas\": \"Paciente presenta síntomas leves.\",\r\n        \"fechaHora\": \"2024-11-07T09:00:00\",\r\n        \"insumoId\": 1,\r\n        \"cantidadUsada\": 2     \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/citas/24",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"citas",
+						"24"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteCitas",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/citas/24",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"citas",
+						"24"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,98 @@
+{
+	"info": {
+		"_postman_id": "bd8c920d-adbb-4af1-9b35-416a41019838",
+		"name": "Recordatorios",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39443149"
+	},
+	"item": [
+		{
+			"name": "GetRecordatorios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/recordatorios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"recordatorios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetRecordatoriosID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/recordatorios/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"recordatorios",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutRecordatorios",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"recordatorioId\": 1,\r\n    \"citaId\": 33,\r\n    \"fechaRecordatorio\": \"2025-11-10T10:00:00\",\r\n    \"mensaje\": \"Recordatorio: Tienes una cita el 2024-11-10 10:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/recordatorios/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"recordatorios",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/recordatorios/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"recordatorios",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "fa2b3cb9-d80f-47a8-ace5-dc163949f9c2",
+		"name": "Insumo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39443149"
+	},
+	"item": [
+		{
+			"name": "PostInsumo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Guantes Médicos\",\r\n    \"cantidad\": 50,\r\n    \"categoria\": \"Protección\",\r\n    \"fecha_caducidad\": \"2025-12-31\",\r\n    \"proveedor\": \"Proveedor de Salud SA\",\r\n    \"ubicacion\": \"Almacén A-12\",\r\n    \"fecha_registro\": \"2024-11-04T09:38:19\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/insumos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"insumos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetInsumo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/insumos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"insumos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetInsumoID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/insumos/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"insumos",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutInsumo",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Guantes Médicos\",\r\n    \"cantidad\": 60,\r\n    \"categoria\": \"Protección\",\r\n    \"fecha_caducidad\": \"2025-12-31\",\r\n    \"proveedor\": \"Proveedor de Salud SA\",\r\n    \"ubicacion\": \"Almacén A-12\",\r\n    \"fecha_registro\": \"2024-11-04T09:38:19\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/insumos/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"insumos",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteInsumo",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/insumos/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"insumos",
+						"6"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

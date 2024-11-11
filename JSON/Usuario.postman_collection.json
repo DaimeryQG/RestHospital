@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "dddd3eef-c170-4027-b7c8-6f0083ea71be",
+		"name": "Usuario",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39443149"
+	},
+	"item": [
+		{
+			"name": "PostUsuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Luis\",\r\n    \"apellido\": \"González\",\r\n    \"fechaNacimiento\": \"1985-08-15\",\r\n    \"genero\": \"Masculino\",\r\n    \"correoElectronico\": \"luis.gonzalez@example.com\",\r\n    \"telefono\": \"5551234\",\r\n    \"fechaRegistro\": \"2024-11-04\",\r\n    \"curp\": \"LOGE850815HDFNLN05\",\r\n    \"RFC\": \"LOGE850815ABC\",\r\n    \"ciudad\": \"Guadalajara\",\r\n    \"direccion\": \"Calle Falsa 123\",\r\n    \"estado\": \"Jalisco\",\r\n    \"especialidad\": \"Pediatría\",\r\n    \"tipoUsuario\": \"doctor\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/usuarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUsuario",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/usuarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUsuarioID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/usuarios/17",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"usuarios",
+						"17"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutUsuario",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Luis\",\r\n    \"apellido\": \"Perezzzxd\",\r\n    \"fechaNacimiento\": \"1985-08-15\",\r\n    \"genero\": \"Masculino\",\r\n    \"correoElectronico\": \"luis.gonzalez@example.com\",\r\n    \"telefono\": \"5551234\",\r\n    \"fechaRegistro\": \"2024-11-04\",\r\n    \"curp\": \"LOGE850815HDFNLN05\",\r\n    \"RFC\": \"LOGE850815ABC\",\r\n    \"ciudad\": \"Guadalajara\",\r\n    \"direccion\": \"Calle Falsa 123\",\r\n    \"estado\": \"Jalisco\",\r\n    \"especialidad\": \"Pediatría\",\r\n    \"tipoUsuario\": \"doctor\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/usuarios/17",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"usuarios",
+						"17"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteUsuario",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/usuarios/17",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"usuarios",
+						"17"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
