@@ -1,0 +1,52 @@
+package com.imss.qro.controller;
+
+import com.imss.qro.models.Cita;
+import com.imss.qro.service.CitaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/citas")
+public class CitaController {
+
+    @Autowired
+    private CitaService citaService;
+
+    @GetMapping
+    public List<Cita> obtenerTodasLasCitas() {
+        return citaService.obtenerTodasLasCitas();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Cita> obtenerCitaPorId(@PathVariable Integer id) {
+        Optional<Cita> cita = citaService.obtenerCitaPorId(id);
+        return cita.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity<Cita> registrarCita(@RequestBody Cita cita) {
+        Cita nuevaCita = citaService.registrarCita(cita);
+        return new ResponseEntity<>(nuevaCita, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Cita> actualizarCita(@PathVariable Integer id, @RequestBody Cita detallesCita) {
+        Cita citaActualizada = citaService.actualizarCita(id, detallesCita);
+        if (citaActualizada != null) {
+            return ResponseEntity.ok(citaActualizada);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarCita(@PathVariable Integer id) {
+        citaService.eliminarCita(id);
+        return ResponseEntity.noContent().build();
+    }
+}

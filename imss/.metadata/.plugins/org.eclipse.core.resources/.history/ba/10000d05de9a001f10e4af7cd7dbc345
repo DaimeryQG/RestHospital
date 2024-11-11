@@ -1,0 +1,7 @@
+package com.imss.qro.repository;
+
+
+
+public class InsumosRepository extends JpaRepository<Insumos, Integer> {
+
+}

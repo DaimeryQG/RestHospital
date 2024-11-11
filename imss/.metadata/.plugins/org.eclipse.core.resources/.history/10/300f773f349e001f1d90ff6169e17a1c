@@ -1,0 +1,66 @@
+package com.imss.qro.controller;
+
+import com.imss.qro.models.Insumos;
+import com.imss.qro.service.InsumoService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import jakarta.validation.Valid;
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/insumos")
+public class InsumoController {
+
+    private final InsumoService insumoService;
+
+    public InsumoController(InsumoService insumoService) {
+        this.insumoService = insumoService;
+    }
+
+    // Endpoint para obtener todos los insumos
+    @GetMapping
+    public List<Insumos> obtenerTodosLosInsumos() {
+        return insumoService.obtenerTodosLosInsumos();
+    }
+
+    // Endpoint para obtener un insumo por ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Insumos> obtenerInsumoPorId(@PathVariable Integer id) {
+        Optional<Insumos> insumo = insumoService.obtenerInsumoPorId(id);
+        return insumo.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    // Endpoint para crear un nuevo insumo
+    @PostMapping
+    public ResponseEntity<Void> registrarInsumo(@Valid @RequestBody Insumos insumo) {
+        // Registramos el insumo usando el servicio
+        String mensaje = insumoService.registrarInsumo(insumo); // Aunque no usamos el mensaje directamente en la respuesta
+        return ResponseEntity.status(201).build();  // Devuelve 201 Created
+    }
+
+    // Endpoint para actualizar un insumo existente
+    @PutMapping("/{id}")
+    public ResponseEntity<String> actualizarInsumo(@PathVariable Integer id, @Valid @RequestBody Insumos insumoDetalles) {
+        String mensaje = insumoService.actualizarInsumo(id, insumoDetalles); // Obtenemos el mensaje desde el servicio
+        if ("Insumo actualizado con éxito".equals(mensaje)) {
+            return ResponseEntity.ok(mensaje);  // Si la actualización fue exitosa, devolvemos 200 OK con el mensaje
+        } else {
+            return ResponseEntity.notFound().build();  // Si no se encontró el insumo, devolvemos 404 Not Found
+        }
+    }
+
+    // Endpoint para eliminar un insumo por ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminarInsumo(@PathVariable Integer id) {
+        try {
+            // Intentamos eliminar el insumo y devolvemos el mensaje recibido del servicio
+            String mensaje = insumoService.eliminarInsumo(id);
+            return ResponseEntity.ok(mensaje);  // Si la eliminación fue exitosa, devolvemos 200 OK
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(404).body(e.getMessage());  // Si el insumo no fue encontrado, devolvemos 404 Not Found
+        }
+    }
+}
+

@@ -1,0 +1,6 @@
+package com.imss.qro.models;
+
+public enum TipoUsuario {
+    DOCTOR,
+    PACIENTE
+}

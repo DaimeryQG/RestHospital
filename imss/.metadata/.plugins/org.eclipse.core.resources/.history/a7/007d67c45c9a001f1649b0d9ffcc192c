@@ -1,0 +1,46 @@
+package com.imss.qro.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class UsuarioService {
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    public List<Usuario> obtenerTodosLosUsuarios() {
+        return usuarioRepository.findAll();
+    }
+
+    public Optional<Usuario> obtenerUsuarioPorId(Integer id) {
+        return usuarioRepository.findById(id);
+    }
+
+    public Usuario crearUsuario(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
+
+    public Usuario actualizarUsuario(Integer id, Usuario usuarioDetalles) {
+        return usuarioRepository.findById(id).map(usuario -> {
+            usuario.setNombre(usuarioDetalles.getNombre());
+            usuario.setApellido(usuarioDetalles.getApellido());
+            usuario.setFechaNacimiento(usuarioDetalles.getFechaNacimiento());
+            usuario.setGenero(usuarioDetalles.getGenero());
+            usuario.setCorreoElectronico(usuarioDetalles.getCorreoElectronico());
+            usuario.setTelefono(usuarioDetalles.getTelefono());
+            usuario.setFechaRegistro(usuarioDetalles.getFechaRegistro());
+            usuario.setCURP(usuarioDetalles.getCURP());
+            usuario.setRFC(usuarioDetalles.getRFC());
+            usuario.setCiudad(usuarioDetalles.getCiudad());
+            usuario.setDireccion(usuarioDetalles.getDireccion());
+            usuario.setEstado(usuarioDetalles.getEstado());
+            usuario.setEspecialidad(usuarioDetalles.getEspecialidad());
+            usuario.setTipoUsuario(usuarioDetalles.getTipoUsuario());
+            return usuarioRepository.save(usuario);
+        }).orElse(null);
+    }
+
+    public void eliminarUsuario(Integer id) {
+        usuarioRepository.deleteById(id);
+    }
+}

@@ -1,0 +1,74 @@
+package com.imss.qro.service;
+
+import java.util.List;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.imss.qro.models.Cita;
+import com.imss.qro.repository.CitaRepository;
+
+@Service
+public class CitaService {
+
+    @Autowired
+    private CitaRepository citaRepository;
+
+    public List<Cita> obtenerTodasLasCitas() {
+        return citaRepository.findAll();
+    }
+
+    public Optional<Cita> obtenerCitaPorId(Integer id) {
+        return citaRepository.findById(id);
+    }
+
+    public Cita registrarCita(Cita cita) {
+        return citaRepository.save(cita);
+    }
+
+    /*
+    public Cita actualizarCita(Integer id, Cita detallesCita) {
+        return citaRepository.findById(id).map(cita -> {
+            cita.setPacienteId(detallesCita.getPacienteId());
+            cita.setDoctorId(detallesCita.getDoctorId());
+            cita.setFechaCita(detallesCita.getFechaCita());
+            cita.setNotificado(detallesCita.getNotificado());
+            cita.setMotivo(detallesCita.getMotivo());
+            cita.setNotas(detallesCita.getNotas());
+            cita.setFechaHora(detallesCita.getFechaHora());
+            cita.setInsumoId(detallesCita.getInsumoId());
+            cita.setCantidadUsada(detallesCita.getCantidadUsada());
+            return citaRepository.save(cita);
+        }).orElse(null);
+    }
+    */
+    
+    public Cita actualizarCita(Integer id, Cita detallesCita) {
+        return citaRepository.findById(id).map(cita -> {
+            cita.setPacienteId(detallesCita.getPacienteId());
+            cita.setDoctorId(detallesCita.getDoctorId());
+            cita.setFechaCita(detallesCita.getFechaCita());
+            cita.setNotificado(detallesCita.getNotificado());
+            cita.setMotivo(detallesCita.getMotivo());
+            cita.setNotas(detallesCita.getNotas());
+            cita.setFechaHora(detallesCita.getFechaHora());
+            cita.setInsumoId(detallesCita.getInsumoId());
+            cita.setCantidadUsada(detallesCita.getCantidadUsada());
+            // Imprimir mensaje de actualización en la consola
+            System.out.println("Cita con ID " + id + " ha sido actualizada.");
+            return citaRepository.save(cita);
+        }).orElse(null);
+    }
+
+    public String eliminarCita(Integer id) {
+        Optional<Cita> citaOptional = citaRepository.findById(id);
+        if (citaOptional.isPresent()) {
+            citaRepository.deleteById(id);
+            return "La cita con ID " + id + " fue eliminada exitosamente.";
+        } else {
+            throw new IllegalArgumentException("No se encontró ninguna cita con ID " + id);
+        }
+    }
+}

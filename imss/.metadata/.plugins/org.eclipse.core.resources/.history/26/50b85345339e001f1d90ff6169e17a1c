@@ -1,0 +1,88 @@
+package com.imss.qro.service;
+
+import com.imss.qro.models.Insumos;
+import com.imss.qro.repository.InsumosRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class InsumoService {
+
+    private static final Logger logger = LoggerFactory.getLogger(InsumoService.class);
+
+    @Autowired
+    private final InsumosRepository insumosRepository;
+
+    public InsumoService(InsumosRepository insumosRepository) {
+        this.insumosRepository = insumosRepository;
+    }
+
+    // Método para obtener todos los insumos
+    public List<Insumos> obtenerTodosLosInsumos() {
+        logger.info("Obteniendo todos los insumos");
+        List<Insumos> insumos = insumosRepository.findAll();
+        if (insumos.isEmpty()) {
+            logger.warn("No se encontraron insumos en la base de datos.");
+        } else {
+            logger.info("Se han obtenido {} insumos.", insumos.size());
+        }
+        return insumos;
+    }
+
+    // Método para obtener un insumo por su ID
+    public Optional<Insumos> obtenerInsumoPorId(Integer id) {
+        logger.info("Buscando insumo con ID {}", id);
+        Optional<Insumos> insumo = insumosRepository.findById(id);
+        if (insumo.isPresent()) {
+            logger.info("Insumo con ID {} encontrado.", id);
+        } else {
+            logger.warn("No se encontró insumo con ID {}", id);
+        }
+        return insumo;
+    }
+
+    // Método para crear un nuevo insumo
+    public Insumos registrarInsumo(Insumos insumo) {
+        logger.info("Registrando nuevo insumo: {}", insumo.getNombre());
+        Insumos insumoGuardado = insumosRepository.save(insumo);
+        logger.info("Insumo registrado con ID {}", insumoGuardado.getId());
+        return insumoGuardado;
+    }
+
+    // Método para actualizar un insumo existente
+    public Insumos actualizarInsumo(Integer id, Insumos insumoDetalles) {
+        logger.info("Actualizando insumo con ID {}", id);
+        return insumosRepository.findById(id).map(insumoExistente -> {
+            logger.info("Actualizando detalles del insumo con ID {}", id);
+            insumoExistente.setNombre(insumoDetalles.getNombre());
+            insumoExistente.setCantidad(insumoDetalles.getCantidad());
+            insumoExistente.setCategoria(insumoDetalles.getCategoria());
+            insumoExistente.setFecha_caducidad(insumoDetalles.getFecha_caducidad());
+            insumoExistente.setProveedor(insumoDetalles.getProveedor());
+            insumoExistente.setUbicacion(insumoDetalles.getUbicacion());
+            insumoExistente.setFecha_registro(insumoDetalles.getFecha_registro());
+            // Actualiza otros campos si es necesario
+            Insumos insumoActualizado = insumosRepository.save(insumoExistente);
+            logger.info("Insumo con ID {} actualizado.", id);
+            return insumoActualizado;
+        }).orElse(null);
+    }
+
+    // Método para eliminar un insumo por su ID
+    public boolean eliminarInsumo(Integer id) {
+        logger.info("Eliminando insumo con ID {}", id);
+        if (insumosRepository.existsById(id)) {
+            insumosRepository.deleteById(id);
+            logger.info("Insumo con ID {} eliminado exitosamente.", id);
+            return true;
+        } else {
+            logger.warn("No se encontró insumo con ID {} para eliminar.", id);
+            return false;
+        }
+    }
+}

@@ -1,0 +1,56 @@
+package com.imss.qro.service;
+
+import com.imss.qro.models.Insumos;
+import com.imss.qro.repository.InsumosRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class InsumoService {
+
+    private final InsumosRepository insumosRepository;
+
+    @Autowired
+    public InsumoService(InsumosRepository insumosRepository) {
+        this.insumosRepository = insumosRepository;
+    }
+
+    // Método para obtener todos los insumos
+    public List<Insumos> obtenerTodosLosInsumos() {
+        return insumosRepository.findAll();
+    }
+
+    // Método para obtener un insumo por su ID
+    public Optional<Insumos> obtenerInsumoPorId(Integer id) {
+        return insumosRepository.findById(id);
+    }
+
+    // Método para crear un nuevo insumo
+    public Insumos registrarInsumo(Insumos insumo) {
+        return insumosRepository.save(insumo);
+    }
+
+    // Método para actualizar un insumo existente
+    public Insumos actualizarInsumo(Integer id, Insumos insumoDetalles) {
+        return insumosRepository.findById(id).map(insumoExistente -> {
+            insumoExistente.setNombre(insumoDetalles.getNombre());
+            insumoExistente.setDescripcion(insumoDetalles.getDescripcion());
+            insumoExistente.setCantidad(insumoDetalles.getCantidad());
+            // Actualiza otras propiedades si es necesario
+            return insumosRepository.save(insumoExistente);
+        }).orElse(null);
+    }
+
+    // Método para eliminar un insumo por su ID
+    public boolean eliminarInsumo(Integer id) {
+        if (insumosRepository.existsById(id)) {
+            insumosRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
+}

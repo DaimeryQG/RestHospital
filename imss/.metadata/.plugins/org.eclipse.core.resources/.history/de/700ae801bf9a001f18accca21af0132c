@@ -1,0 +1,6 @@
+package com.imss.qro.repository;
+
+
+public class EspecialidadRepository extends JpaRepository<Especialidad, Integer> {
+
+}

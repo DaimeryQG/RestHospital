@@ -1,0 +1,11 @@
+package com.imss.qro.models;
+
+public class Cita {
+
+	private int paciente_id;
+	private int doctor_id;
+	private String notas;
+	private int insumo_id;
+	private int cantidad_usada;
+	
+}

@@ -1,0 +1,9 @@
+package com.imss.qro.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+
+public class EspecialidadRepository extends JpaRepository<Especialidad, Integer> {
+
+}

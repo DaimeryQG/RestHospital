@@ -1,0 +1,77 @@
+package com.imss.qro.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.imss.qro.models.Usuario;
+import com.imss.qro.repository.UsuarioRepository;
+
+@Service
+public class UsuarioService {
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+    
+    public UsuarioService(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
+
+    public List<Usuario> obtenerTodosLosUsuarios() {
+        return usuarioRepository.findAll();
+    }
+
+    public Optional<Usuario> obtenerUsuarioPorId(Integer id) {
+        return usuarioRepository.findById(id);
+    }
+
+    public Usuario registrarUsuario(Usuario usuario) {
+        System.out.println("Registrando usuario: " + usuario);
+        if (usuario.getCURP() == null || usuario.getCURP().isEmpty()) {
+            throw new IllegalArgumentException("El CURP es obligatorio");
+        }
+
+        try {
+            return usuarioRepository.save(usuario);
+        } catch (Exception e) {
+            e.printStackTrace(); // Esto imprimirá cualquier excepción que ocurra
+            throw new RuntimeException("Error al guardar el usuario: " + e.getMessage());
+        }
+    }
+
+    // Metodo para Actualizar los Usuarios
+    public String actualizarUsuario(Integer id, Usuario usuarioDetalles) {
+        return usuarioRepository.findById(id).map(usuario -> {
+            usuario.setNombre(usuarioDetalles.getNombre());
+            usuario.setApellido(usuarioDetalles.getApellido());
+            usuario.setFechaNacimiento(usuarioDetalles.getFechaNacimiento());
+            usuario.setGenero(usuarioDetalles.getGenero());
+            usuario.setCorreoElectronico(usuarioDetalles.getCorreoElectronico());
+            usuario.setTelefono(usuarioDetalles.getTelefono());
+            usuario.setFechaRegistro(usuarioDetalles.getFechaRegistro());
+            usuario.setCURP(usuarioDetalles.getCURP());
+            usuario.setRFC(usuarioDetalles.getRFC());
+            usuario.setCiudad(usuarioDetalles.getCiudad());
+            usuario.setDireccion(usuarioDetalles.getDireccion());
+            usuario.setEstado(usuarioDetalles.getEstado());
+            usuario.setEspecialidad(usuarioDetalles.getEspecialidad());
+            usuario.setTipoUsuario(usuarioDetalles.getTipoUsuario());
+            usuarioRepository.save(usuario);
+            return "Usuario con ID " + id + " actualizado con éxito.";
+        }).orElse("Usuario con ID " + id + " no se encontra.");
+    }
+
+    // Metodo para Eliminar los Usuarios
+    public String eliminarUsuario(Integer id) {
+    	Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
+    	if(usuarioOptional.isPresent()) {
+    		usuarioRepository.deleteById(id);
+    		return "El usuario con ID " + id + " fue eliminado exitosamente.";
+    	} else {
+    		throw new IllegalArgumentException("No se encontró ningun Usuario con ID " + id);
+    	}
+    }
+
+}

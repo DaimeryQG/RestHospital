@@ -1,0 +1,5 @@
+package com.imss.qro.models;
+
+public class Citas {
+
+}
